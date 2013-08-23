@@ -42,7 +42,7 @@ actions = lambda do
 	if ENV['MODE']=='mint'
 		XDo::Mouse.move(275, 300)
 	else
-		XDo::Mouse.move(295, 300)
+		XDo::Mouse.move(225, 210)
 	end
 
 	XDo::Mouse.click
