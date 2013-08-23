@@ -39,7 +39,7 @@ actions = lambda do
 
 	sleep 3
 
-	XDo::Mouse.move(280, 270)
+	XDo::Mouse.move(275, 300)
 
 	XDo::Mouse.click
 
