@@ -20,13 +20,12 @@ actions = proc do
 	element.send_keys initial_text
 	element.submit
 
-	sleep 5
+	sleep 3
 	
 	win = XDo::XWindow.from_title(/Hello WebDriver!/)
 	puts "Window size", win.size
 	puts 'Abs position', win.abs_position
 
-	win.toggle_maximize
 	win.resize(960,740)
 
 	puts 'resized'
@@ -39,18 +38,17 @@ actions = proc do
 
 	sleep 3
 
-	offset = (ENV['MODE']=='mint') ? 50 : 0
-
 	#clicking google images link
-	XDo::Mouse.move(135 + offset, 220)
+	XDo::Mouse.move(230, 160)
 	XDo::Mouse.click
 
-	sleep 10
+	sleep 3
 
 	#clicking google input field
-	XDo::Mouse.move(225 + offset, 300)
+	XDo::Mouse.move(420, 205)
 	XDo::Mouse.click
 
+	# deleting text in the search box
 	XDo::Keyboard.simulate("{BS}"*initial_text.length)
 
 	XDo::Keyboard.simulate("Hello. I am XDO. Lets do some tests!{NUM_ENTER}")
