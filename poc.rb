@@ -26,7 +26,7 @@ actions = proc do
 	puts "Window size", win.size
 	puts 'Abs position', win.abs_position
 
-	win.move(0, 0) #This move call simply hangs
+	win.toggle_maximize
 	win.resize(960,740)
 
 	puts 'resized'
@@ -42,12 +42,14 @@ actions = proc do
 	offset = (ENV['MODE']=='mint') ? 50 : 0
 
 	#clicking google images link
-	XDo::Mouse.click(135 + offset, 220)
+	XDo::Mouse.move(135 + offset, 220)
+	XDo::Mouse.click
 
 	sleep 10
 
 	#clicking google input field
-	XDo::Mouse.click(225 + offset, 300)
+	XDo::Mouse.move(225 + offset, 300)
+	XDo::Mouse.click
 
 	XDo::Keyboard.simulate("{BS}"*initial_text.length)
 
