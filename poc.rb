@@ -7,7 +7,7 @@ require "xdo/mouse"
 require "xdo/xwindow"
 require 'headless'
 
-actions = lambda do 
+actions = proc do 
 	initial_text = "Hello WebDriver!"
 
 	driver = Selenium::WebDriver.for :firefox
@@ -20,13 +20,13 @@ actions = lambda do
 	element.send_keys initial_text
 	element.submit
 
-	sleep 3
+	sleep 5
 	
 	win = XDo::XWindow.from_title(/Hello WebDriver!/)
 	puts "Window size", win.size
 	puts 'Abs position', win.abs_position
 
-	# win.move(0, 0) #This move call simply hangs
+	win.move(0, 0) #This move call simply hangs
 	win.resize(960,740)
 
 	puts 'resized'
@@ -39,13 +39,15 @@ actions = lambda do
 
 	sleep 3
 
-	if ENV['MODE']=='mint'
-		XDo::Mouse.move(275, 300)
-	else
-		XDo::Mouse.move(225, 210)
-	end
+	offset = (ENV['MODE']=='mint') ? 50 : 0
 
-	XDo::Mouse.click
+	#clicking google images link
+	XDo::Mouse.click(135 + offset, 220)
+
+	sleep 10
+
+	#clicking google input field
+	XDo::Mouse.click(225 + offset, 300)
 
 	XDo::Keyboard.simulate("{BS}"*initial_text.length)
 
@@ -59,7 +61,7 @@ actions = lambda do
 	driver.quit
 end
 
-if ENV['HEADLESS'] == 'false'
+if (ENV['HEADLESS'] == 'false')
 	actions.call
 else
 	Headless.ly &actions
