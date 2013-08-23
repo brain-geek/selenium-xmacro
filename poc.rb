@@ -7,7 +7,7 @@ require "xdo/mouse"
 require "xdo/xwindow"
 require 'headless'
 
-Headless.ly do 
+actions = lambda do 
 	initial_text = "Hello WebDriver!"
 
 	driver = Selenium::WebDriver.for :firefox
@@ -53,4 +53,10 @@ Headless.ly do
 	puts driver.current_url
 
 	driver.quit
+end
+
+if ENV['HEADLESS'] == 'false'
+	actions.call
+else
+	Headless.ly &actions
 end
