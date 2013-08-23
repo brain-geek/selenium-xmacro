@@ -39,7 +39,11 @@ actions = lambda do
 
 	sleep 3
 
-	XDo::Mouse.move(275, 300)
+	if ENV['MODE']=='mint'
+		XDo::Mouse.move(275, 300)
+	else
+		XDo::Mouse.move(295, 300)
+	end
 
 	XDo::Mouse.click
 
