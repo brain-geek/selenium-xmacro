@@ -4,6 +4,7 @@ require 'pry-nav'
 
 require "xdo/keyboard"
 require "xdo/mouse"
+require "xdo/xwindow"
 require 'headless'
 
 Headless.ly do 
@@ -20,6 +21,18 @@ Headless.ly do
 	element.submit
 
 	sleep 3
+	
+	win = XDo::XWindow.from_title(/Hello WebDriver!/)
+	puts "Window size", win.size
+	puts 'Abs position', win.abs_position
+
+	# win.move(0, 0) #This move call simply hangs
+	win.resize(960,740)
+
+	puts 'resized'
+
+	puts "Window size", win.size
+	puts 'Abs position', win.abs_position
 
 	puts driver.title
 	puts driver.current_url
