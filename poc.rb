@@ -38,20 +38,26 @@ actions = proc do
 
 	sleep 3
 
+	win.move(20, 20)
+
+#        binding.pry
+
 	#clicking google images link
-	XDo::Mouse.move(230, 160, 1)
+	XDo::Mouse.move(175, 145)
 	XDo::Mouse.click
 
 	sleep 3
 
+	binding.pry
+
 	#clicking google input field
-	XDo::Mouse.move(420, 205, 1)
+	XDo::Mouse.move(550,190)
 	XDo::Mouse.click
 
-	sleep 1
+	sleep 2
 
 	# deleting text in the search box
-	XDo::Keyboard.simulate("{BS}"*initial_text.length)
+	XDo::Keyboard.simulate("{BS}"*(initial_text.length+10))
 
 	XDo::Keyboard.simulate("Hello. I am XDO. Lets do some tests!{NUM_ENTER}")
 
